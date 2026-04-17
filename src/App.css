@@ -1,0 +1,13 @@
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Base card styling for dashboard widgets */
+.dashboard-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}

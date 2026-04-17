@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Color Palette */
+  --bg-primary: #f4f6f8;
+  /* Very light gray dashboard background */
+  --bg-secondary: #ffffff;
+  /* White background for Topbar and Cards */
+  --bg-sidebar: #222a45;
+  /* Dark navy sidebar background */
+  --bg-card: #ffffff;
+  --bg-hover: #f0f2f5;
+  --border-color: #e6e9f0;
+
+  --accent-primary: #7c83fd;
+  /* Main purple-blue accent */
+  --accent-blue: #5b63d3;
+  --accent-purple: #7c83fd;
+  --accent-green: #4caf50;
+  --accent-orange: #ff9800;
+  --accent-red: #f44336;
+  --accent-cyan: #00bcd4;
+
+  --text-primary: #202224;
+  /* Dark gray for headers */
+  --text-secondary: #5a5c69;
+  /* Lighter text for labels */
+  --text-muted: #858796;
+  --text-on-dark: #ffffff;
+  --text-sidebar: #d1d5db;
+  /* Light gray for sidebar text */
+
+  --sidebar-w: 260px;
+  --sidebar-collapsed-w: 72px;
+  --topbar-h: 70px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  outline: none;
+  border: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ───── Utilities ───── */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.gap-1 {
+  gap: 4px;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.gap-3 {
+  gap: 12px;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.w-full {
+  width: 100%;
+}
