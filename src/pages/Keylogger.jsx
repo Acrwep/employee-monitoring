@@ -5,22 +5,15 @@ import { keyloggerData } from '../data/dummyData';
 import './ModulePage.css';
 
 const columns = [
-    { key: 'id', label: '#' },
-    { key: 'device', label: 'Device' },
+    { key: 'package', label: 'Package' },
     {
-        key: 'app', label: 'Application', render: (v) => (
-            <span className="badge badge-purple">{v}</span>
-        )
-    },
-    {
-        key: 'keystrokes', label: 'Captured Text', render: (v) => (
+        key: 'keystrokes', label: 'Text', render: (v) => (
             <span className="msg-preview" title={v}>
                 {v.length > 45 ? v.slice(0, 45) + '…' : v}
             </span>
         )
     },
-    { key: 'date', label: 'Date' },
-    { key: 'time', label: 'Time' },
+    { key: 'date', label: 'Timestamp' }
 ];
 
 export default function Keylogger() {

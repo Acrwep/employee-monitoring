@@ -5,22 +5,21 @@ import { whatsappChatsData } from '../data/dummyData';
 import './ModulePage.css';
 
 const columns = [
-    { key: 'id', label: '#' },
-    { key: 'contact', label: 'Contact' },
     {
-        key: 'type', label: 'Direction', render: (v) => (
-            <span className={v === 'Received' ? 'dir-received' : 'dir-sent'}>{v}</span>
+        key: 'direction', label: 'Direction', render: (v) => (
+            <span className={v === 'Incoming' ? 'dir-incoming' : 'dir-sent'}>{v}</span>
         )
     },
+    { key: 'name', label: 'Contact Name' },
+    { key: 'number', label: 'WhatsApp Number/User' },
     {
-        key: 'message', label: 'Message', render: (v) => (
+        key: 'text', label: 'Message Text', render: (v) => (
             <span className="msg-preview" title={v}>
                 {v.length > 50 ? v.slice(0, 50) + '…' : v}
             </span>
         )
     },
-    { key: 'date', label: 'Date' },
-    { key: 'time', label: 'Time' },
+    { key: 'timestamp', label: 'Timestamp' },
 ];
 
 export default function WhatsappChats() {

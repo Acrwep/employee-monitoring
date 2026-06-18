@@ -1,32 +1,37 @@
 import React from 'react';
-import { MdCallReceived, MdWhatsapp } from 'react-icons/md';
+import { MdCallReceived, MdWhatsapp, MdDownload } from 'react-icons/md';
 import DataTable from '../components/common/DataTable';
 import { whatsappIncomingCallsData } from '../data/dummyData';
 import './ModulePage.css';
 
 const statusColor = (s) => {
-    if (s === 'Answered') return 'badge badge-green';
-    if (s === 'Missed') return 'badge badge-red';
-    if (s === 'Declined') return 'badge badge-orange';
+    if (s === 'Outgoing') return 'badge badge-orange';
+    if (s === 'Incomming') return 'badge badge-green';
+    if (s === 'Declined') return 'badge badge-red';
     return 'badge badge-blue';
 };
 
 const columns = [
-    { key: 'id', label: '#' },
-    { key: 'contact', label: 'Contact' },
     {
-        key: 'type', label: 'Call Type', render: (v) => (
-            <span className={v === 'Video' ? 'badge badge-purple' : 'badge badge-cyan'}>{v}</span>
-        )
-    },
-    { key: 'date', label: 'Date' },
-    { key: 'time', label: 'Time' },
-    { key: 'duration', label: 'Duration' },
-    {
-        key: 'status', label: 'Status', render: (v) => (
+        key: 'status', label: 'Direction', render: (v) => (
             <span className={statusColor(v)}>{v}</span>
         )
     },
+    { key: 'name', label: 'Name' },
+    { key: 'number', label: 'Number' },
+    { key: 'duration', label: 'Duration' },
+    { key: 'size', label: 'Size' },
+    {
+        key: 'play', label: 'Download Link', render: (v) => (
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <span className="badge badge-blue" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <MdDownload size={14} />
+                </span>
+                <span className={v === 'Play' ? 'badge badge-purple' : 'badge badge-cyan'} style={{ cursor: 'pointer' }}>{v}</span>
+            </div>
+        )
+    },
+    { key: 'timestamp', label: 'Timestamp' },
 ];
 
 export default function WhatsappIncoming() {
@@ -36,13 +41,13 @@ export default function WhatsappIncoming() {
                 <div className="module-title-row">
                     <span className="module-icon green"><MdWhatsapp /></span>
                     <div>
-                        <h1 className="module-title">WhatsApp Incoming Calls</h1>
-                        <p className="module-sub">All incoming WhatsApp voice & video calls</p>
+                        <h1 className="module-title">WhatsApp Call Recording</h1>
+                        <p className="module-sub">All Call Record WhatsApp voice calls</p>
                     </div>
                 </div>
             </div>
             <DataTable
-                title="WhatsApp Incoming Calls"
+                title="WhatsApp Call Recording"
                 icon={<MdCallReceived />}
                 columns={columns}
                 data={whatsappIncomingCallsData}

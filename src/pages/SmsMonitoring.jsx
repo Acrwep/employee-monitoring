@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { MdMessage } from 'react-icons/md';
 import DataTable from '../components/common/DataTable';
-import { smsMonitoringData } from '../data/dummyData';
 import './ModulePage.css';
 
 const columns = [
@@ -25,6 +25,49 @@ const columns = [
 ];
 
 export default function SmsMonitoring() {
+    const [smsData, setSmsData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetchMessage();
+    }, []);
+
+    const fetchMessage = async () => {
+        try {
+            const response = await axios.post(
+                'http://localhost:3000/api/messages',
+                {
+                    "user_id": 101
+                });
+
+            if (response.data.success) {
+
+                const transformedData = response.data.data.map((msg, index) => {
+
+                    const dateObj = new Date(msg.time_periode);
+
+                    return {
+                        id: index + 1,
+                        contact: msg.full_name,
+                        number: msg.sender_id,
+                        type: 'Incoming',
+                        message: msg.message_body,
+                        date: dateObj.toLocaleDateString(),
+                        time: dateObj.toLocaleTimeString()
+                    };
+                });
+
+                setSmsData(transformedData);
+            }
+
+        } catch (err) {
+            console.error(err);
+            setError('Failed to load messages');
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
         <div className="module-root">
             <div className="module-header">
@@ -36,12 +79,18 @@ export default function SmsMonitoring() {
                     </div>
                 </div>
             </div>
-            <DataTable
-                title="SMS Monitoring"
-                icon={<MdMessage />}
-                columns={columns}
-                data={smsMonitoringData}
-            />
-        </div>
-    );
+            {loading ? (
+                <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>
+            ) : error ? (
+                <div style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>{error}</div>
+            ) : (
+                <DataTable
+                    title="SMS Monitoring"
+                    icon={<MdMessage />}
+                    columns={columns}
+                    data={smsData}
+                />
+            )}
+
+        </div>)
 }

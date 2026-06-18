@@ -73,6 +73,22 @@ export const callHistoryData = [
     { id: 7, name: "Anita Rao", number: "+91 43210 98765", type: "Incoming", duration: "4:22", date: "2026-02-23", status: "Connected" },
 ];
 
+// ─── Usage Tracking ────────────────────────────────────────────────
+export const usageData = [
+    { id: 1, app_name: "CallTracker", package_name: "com.example.calltracker", usage_duration: 43, date_periode: "2026-06-28", },
+    { id: 2, app_name: "CallTracker2", package_name: "com.example.calltracker", usage_duration: 23, date_periode: "2026-06-29", },
+    { id: 3, app_name: "CallTracker3", package_name: "com.example.calltracker", usage_duration: 35, date_periode: "2026-05-10", },
+    { id: 4, app_name: "CallTracker4", package_name: "com.example.calltracker", usage_duration: 15, date_periode: "2026-05-22", }
+]
+
+// ─── Notification Tracking ────────────────────────────────────────────────
+export const notificationData = [
+    { notification_id: 1, app_name: 'CallTracker', package_name: 'com.example.calltracker', title: 'CallTracker is running', text_content: 'Monitoring in background...', post_time: '2026-06-09 12:18:05', created_at: '2026-06-09 12:18:08' },
+    { notification_id: 2, app_name: 'CallTracker1', package_name: 'com.example.calltracker', title: 'CallTracker is running', text_content: 'Monitoring in background...', post_time: '2026-06-09 12:18:05', created_at: '2026-06-09 12:18:08' },
+    { notification_id: 3, app_name: 'CallTracker2', package_name: 'com.example.calltracker', title: 'CallTracker is running', text_content: 'Monitoring in background...', post_time: '2026-06-09 12:18:05', created_at: '2026-06-09 12:18:08' },
+    { notification_id: 4, app_name: 'CallTracker3', package_name: 'com.example.calltracker', title: 'CallTracker is running', text_content: 'Monitoring in background...', post_time: '2026-06-09 12:18:05', created_at: '2026-06-09 12:18:08' },
+]
+
 // ─── Incoming Calls ────────────────────────────────────────────────
 export const incomingCallsData = [
     { id: 1, name: "Priya Mehta", number: "+91 87654 32109", duration: "3:18", date: "2026-02-25", time: "10:30 AM", status: "Answered" },
@@ -103,32 +119,32 @@ export const smsMonitoringData = [
 
 // ─── Keylogger Tracking ────────────────────────────────────────────
 export const keyloggerData = [
-    { id: 1, app: "WhatsApp", keystrokes: "Hey how are you doing today?", date: "2026-02-25", time: "09:10 AM", device: "Samsung Galaxy S23" },
-    { id: 2, app: "Chrome Browser", keystrokes: "flight tickets mumbai to delhi", date: "2026-02-25", time: "10:00 AM", device: "iPhone 15 Pro" },
-    { id: 3, app: "Gmail", keystrokes: "Subject: Project Update - Please find...", date: "2026-02-24", time: "01:30 PM", device: "Samsung Galaxy S23" },
-    { id: 4, app: "Instagram", keystrokes: "Great photo! Love the vibe 🔥", date: "2026-02-24", time: "03:45 PM", device: "OnePlus 12" },
-    { id: 5, app: "Notes", keystrokes: "Password: mySecret@123 | PIN: 4521", date: "2026-02-23", time: "08:00 AM", device: "Xiaomi 14" },
-    { id: 6, app: "Telegram", keystrokes: "The meeting is at 5 PM tomorrow.", date: "2026-02-22", time: "06:15 PM", device: "Google Pixel 8" },
+    { keystrokes: "Hey how are you doing today?", date: "2026-02-25/09:10 AM", package: "com.whatsapp" },
+    { keystrokes: "flight tickets mumbai to delhi", date: "2026-02-25/10:00 AM", package: "com.android.chrome" },
+    { keystrokes: "Subject: Project Update - Please find...", date: "2026-02-24/01:30 PM", package: "com.instagram.android" },
+    { keystrokes: "Great photo! Love the vibe 🔥", date: "2026-02-24/03:45 PM", package: "com.android.chrome" },
+    { keystrokes: "Password: mySecret@123 | PIN: 4521", date: "2026-02-23/08:00 AM", package: "com.whatsapp" },
+    { keystrokes: "The meeting is at 5 PM tomorrow.", date: "2026-02-22/06:15 PM", package: "com.whatsapp" },
 ];
 
 // ─── WhatsApp Chats ────────────────────────────────────────────────
 export const whatsappChatsData = [
-    { id: 1, contact: "Priya Mehta", message: "Are you coming today?", type: "Received", date: "2026-02-25", time: "08:55 AM" },
-    { id: 2, contact: "Priya Mehta", message: "Yes, I'll be there by 10.", type: "Sent", date: "2026-02-25", time: "09:00 AM" },
-    { id: 3, contact: "Rahul Verma", message: "Check the new project docs.", type: "Received", date: "2026-02-25", time: "10:15 AM" },
-    { id: 4, contact: "vignesh", message: "Meeting postponed to 4 PM.", type: "Received", date: "2026-02-24", time: "12:00 PM" },
-    { id: 5, contact: "vignesh", message: "Okay, noted. Thanks!", type: "Sent", date: "2026-02-24", time: "12:05 PM" },
-    { id: 6, contact: "Sneha Kapoor", message: "Happy Birthday! 🎂🎉", type: "Sent", date: "2026-02-23", time: "09:00 AM" },
-    { id: 7, contact: "Vikram Nair", message: "Send me the invoice ASAP.", type: "Received", date: "2026-02-22", time: "03:30 PM" },
+    { id: 1, direction: "Incoming", name: "Priya Mehta", number: "Account Dept", text: "Are you coming today?", timestamp: "17/06/2026 08:55 AM" },
+    { id: 2, direction: "Incoming", name: "Priya Mehta", number: "6758975648", text: "Yes, I'll be there by 10.", timestamp: "17/06/2026 09:00 AM" },
+    { id: 3, direction: "Incoming", name: "Rahul Verma", number: "9085664765", text: "Check the new project docs.", timestamp: "17/06/2026 09:00 AM" },
+    { id: 4, direction: "Outgoing", name: "vignesh", number: "Whatsapp", text: "Meeting postponed to 4 PM.", timestamp: "17/06/2026 04:00 PM" },
+    { id: 5, direction: "Incoming", name: "vignesh", number: "7564898764", text: "Okay, noted. Thanks!", timestamp: "17/06/2026 04:05 PM" },
+    { id: 6, direction: "Incoming", name: "Sneha Kapoor", number: "Reserve Bank of India", text: "Happy Birthday! 🎂🎉", timestamp: "17/06/2026 09:00 AM" },
+    { id: 7, direction: "Outgoing", name: "Vikram Nair", number: "856748352", text: "Send me the invoice ASAP.", timestamp: "17/06/2026 09:00 AM" },
 ];
 
 // ─── WhatsApp Incoming Calls ───────────────────────────────────────
 export const whatsappIncomingCallsData = [
-    { id: 1, contact: "Priya Mehta", type: "Video", duration: "12:30", date: "2026-02-25", time: "11:00 AM", status: "Answered" },
-    { id: 2, contact: "Rahul Verma", type: "Voice", duration: "0:00", date: "2026-02-25", time: "01:20 PM", status: "Missed" },
-    { id: 3, contact: "vignesh", type: "Voice", duration: "5:45", date: "2026-02-24", time: "09:30 AM", status: "Answered" },
-    { id: 4, contact: "Sneha Kapoor", type: "Video", duration: "20:00", date: "2026-02-23", time: "08:00 PM", status: "Answered" },
-    { id: 5, contact: "Vikram Nair", type: "Voice", duration: "0:00", date: "2026-02-22", time: "02:45 PM", status: "Declined" },
+    { status: "Incomming", name: "Priya Mehta", number: "+91 98765 43210", duration: "12:30", size: "1201 kb", play: "Play", timestamp: "17/06/2026 11:00 AM" },
+    { status: "Incomming", name: "Rahul Verma", number: "+91 76908 79456", duration: "0:00", size: "205 kb", play: "Play", timestamp: "17/06/2026 01:20 PM" },
+    { status: "Incomming", name: "vignesh", number: "+91 90765 87465", duration: "5:45", size: "71 kb", play: "Play", timestamp: "17/06/2026 09:30 AM" },
+    { status: "Incomming", name: "Sneha Kapoor", number: "+91 65789 64592", duration: "20:00", size: "2908 kb", play: "Play", timestamp: "17/06/2026 08:00 PM" },
+    { status: "Incomming", name: "Vikram Nair", number: "+91 93648 67594", duration: "0:00", size: "3278 kb", play: "Play", timestamp: "17/06/2026 02:45 PM" },
 ];
 
 // ─── WhatsApp Outgoing Calls ───────────────────────────────────────

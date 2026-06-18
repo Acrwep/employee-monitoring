@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdHistory } from 'react-icons/md';
+import axios from 'axios';
 import DataTable from '../components/common/DataTable';
-import { callHistoryData } from '../data/dummyData';
 import './ModulePage.css';
 
 const statusColor = (s) => {
@@ -30,6 +30,39 @@ const columns = [
 ];
 
 export default function CallHistory() {
+    const [callLogs, setCallLogs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchCallLogs = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/call-logs/101');
+                if (response.data && response.data.success) {
+                    const transformedData = response.data.data.map(log => ({
+                        id: log.call_id,
+                        name: log.contact_name,
+                        number: log.phone_number,
+                        type: log.call_type,
+                        date: log.call_time,
+                        duration: log.duration,
+                        status: log.duration > 0 ? 'Connected' : 'Missed'
+                    }));
+                    setCallLogs(transformedData);
+                } else {
+                    setError('Failed to fetch call logs.');
+                }
+            } catch (err) {
+                console.error('Error fetching call logs:', err);
+                setError('Failed to load call history.');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCallLogs();
+    }, []);
+
     return (
         <div className="module-root">
             <div className="module-header">
@@ -41,12 +74,19 @@ export default function CallHistory() {
                     </div>
                 </div>
             </div>
-            <DataTable
-                title="Call History"
-                icon={<MdHistory />}
-                columns={columns}
-                data={callHistoryData}
-            />
+
+            {loading ? (
+                <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>
+            ) : error ? (
+                <div style={{ padding: '2rem', textAlign: 'center', color: 'red' }}>{error}</div>
+            ) : (
+                <DataTable
+                    title="Call History"
+                    icon={<MdHistory />}
+                    columns={columns}
+                    data={callLogs}
+                />
+            )}
         </div>
     );
 }
