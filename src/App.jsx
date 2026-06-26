@@ -1,4 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 
 // Layout
 import Layout from "./components/layout/Layout";
@@ -30,6 +36,7 @@ import Telegram from "./pages/Telegram";
 import LinkedIn from "./pages/LinkedIn";
 import Youtube from "./pages/Youtube";
 import WhatsappImage from "./pages/WhatsappImage";
+import Settings from "./pages/Settings/Settings";
 
 const ProtectedRoute = () => {
   const token = localStorage.getItem("AccessToken");
@@ -56,7 +63,10 @@ export default function App() {
             <Route path="/internet-history" element={<InternetHistory />} />
             <Route path="/call-history" element={<CallHistory />} />
             <Route path="/usage-tracking" element={<UsageTracking />} />
-            <Route path="/notification-tracking" element={<NotificationTracking />} />
+            <Route
+              path="/notification-tracking"
+              element={<NotificationTracking />}
+            />
             <Route path="/internet-status" element={<InternetStatus />} />
             <Route path="/instagram" element={<Instagram />} />
             <Route path="/facebook" element={<Facebook />} />
@@ -71,6 +81,7 @@ export default function App() {
             <Route path="/keylogger" element={<Keylogger />} />
             <Route path="/wa-chats" element={<WhatsappChats />} />
             <Route path="/wa-incoming" element={<WhatsappIncoming />} />
+            <Route path="/settings" element={<Settings />} />
             {/* <Route path="/wa-outgoing" element={<WhatsappOutgoing />} />
             <Route path="/wa-audio" element={<WhatsappAudio />} /> */}
           </Route>

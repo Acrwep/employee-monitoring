@@ -27,15 +27,16 @@ import {
   MdLiveTv,
   MdEmail,
   MdOutlineSurroundSound,
-  MdOutlineBrokenImage
+  MdOutlineBrokenImage,
 } from "react-icons/md";
+import { IoMdSettings } from "react-icons/io";
 import {
   FaInstagram,
   FaFacebookSquare,
   FaSnapchatSquare,
   FaTelegramPlane,
   FaLinkedin,
-  FaYoutube
+  FaYoutube,
 } from "react-icons/fa";
 import "./Sidebar.css";
 
@@ -158,7 +159,7 @@ const NAV = [
           //   icon: <MdVoicemail />,
           //   label: "WA Audio Records",
           // }
-        ]
+        ],
       },
       {
         id: "youtube",
@@ -232,8 +233,20 @@ const NAV = [
         icon: <MdOutlineSurroundSound />,
         label: "Surrounded",
       },
-    ]
-  }
+    ],
+  },
+  {
+    id: "settings",
+    label: null,
+    items: [
+      {
+        id: "settings",
+        to: "/settings",
+        icon: <IoMdSettings />,
+        label: "Settings",
+      },
+    ],
+  },
 ];
 
 export default function Sidebar({ collapsed, setCollapsed }) {
@@ -242,7 +255,8 @@ export default function Sidebar({ collapsed, setCollapsed }) {
   const [openDropdowns, setOpenDropdowns] = useState({ "wa-dropdown": false });
 
   const toggleGroup = (id) => setOpenGroups((g) => ({ ...g, [id]: !g[id] }));
-  const toggleDropdown = (id) => setOpenDropdowns((d) => ({ ...d, [id]: !d[id] }));
+  const toggleDropdown = (id) =>
+    setOpenDropdowns((d) => ({ ...d, [id]: !d[id] }));
 
   const handleLogout = () => {
     localStorage.removeItem("AccessToken");
@@ -291,29 +305,59 @@ export default function Sidebar({ collapsed, setCollapsed }) {
 
             {/* Items */}
             <div
-              className={`group-items ${group.label && !openGroups[group.id] && !collapsed
-                ? "hidden"
-                : ""
-                }`}
+              className={`group-items ${
+                group.label && !openGroups[group.id] && !collapsed
+                  ? "hidden"
+                  : ""
+              }`}
             >
-              {group.items.map((item) => (
+              {group.items.map((item) =>
                 item.isDropdown ? (
                   <div key={item.id} className="nav-dropdown-container">
                     <button
                       className={`nav-item dropdown-toggle ${openDropdowns[item.id] ? "open" : ""}`}
                       onClick={() => toggleDropdown(item.id)}
                       title={collapsed ? item.label : undefined}
-                      style={{ width: 'calc(100% - 24px)', background: 'transparent', border: 'none', cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left' }}
+                      style={{
+                        width: "calc(100% - 24px)",
+                        background: "transparent",
+                        border: "none",
+                        cursor: "pointer",
+                        fontFamily: "inherit",
+                        textAlign: "left",
+                      }}
                     >
                       <span className="nav-icon">{item.icon}</span>
-                      {!collapsed && <span className="nav-label">{item.label}</span>}
                       {!collapsed && (
-                        <span className="dropdown-arrow" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
-                          {openDropdowns[item.id] ? <MdExpandLess /> : <MdExpandMore />}
+                        <span className="nav-label">{item.label}</span>
+                      )}
+                      {!collapsed && (
+                        <span
+                          className="dropdown-arrow"
+                          style={{
+                            marginLeft: "auto",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          {openDropdowns[item.id] ? (
+                            <MdExpandLess />
+                          ) : (
+                            <MdExpandMore />
+                          )}
                         </span>
                       )}
                     </button>
-                    <div className="dropdown-items" style={{ paddingLeft: collapsed ? 0 : '15px', display: (!openDropdowns[item.id] && !collapsed) ? 'none' : 'block' }}>
+                    <div
+                      className="dropdown-items"
+                      style={{
+                        paddingLeft: collapsed ? 0 : "15px",
+                        display:
+                          !openDropdowns[item.id] && !collapsed
+                            ? "none"
+                            : "block",
+                      }}
+                    >
                       {item.subItems.map((sub) => (
                         <NavLink
                           key={sub.id}
@@ -349,8 +393,8 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                     )}
                     {!collapsed && <span className="nav-indicator" />}
                   </NavLink>
-                )
-              ))}
+                ),
+              )}
             </div>
           </div>
         ))}
