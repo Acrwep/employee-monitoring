@@ -18,8 +18,25 @@ import {
   MdPhoneInTalk,
   MdVoicemail,
   MdBarChart,
-  MdNotifications
+  MdNotifications,
+  MdCameraAlt,
+  MdLocationOn,
+  MdOutlineScreenshotMonitor,
+  MdSignalCellularConnectedNoInternet4Bar,
+  MdOutlinePhotoSizeSelectActual,
+  MdLiveTv,
+  MdEmail,
+  MdOutlineSurroundSound,
+  MdOutlineBrokenImage
 } from "react-icons/md";
+import {
+  FaInstagram,
+  FaFacebookSquare,
+  FaSnapchatSquare,
+  FaTelegramPlane,
+  FaLinkedin,
+  FaYoutube
+} from "react-icons/fa";
 import "./Sidebar.css";
 
 const NAV = [
@@ -39,12 +56,12 @@ const NAV = [
     id: "general",
     label: "General Features",
     items: [
-      {
-        id: "call-recording",
-        to: "/call-recording",
-        icon: <MdPhoneCallback />,
-        label: "Call Recording",
-      },
+      // {
+      //   id: "call-recording",
+      //   to: "/call-recording",
+      //   icon: <MdPhoneCallback />,
+      //   label: "Call Recording",
+      // },
       {
         id: "call-history",
         to: "/call-history",
@@ -70,10 +87,16 @@ const NAV = [
         label: "SMS Monitoring",
       },
       {
-        id: "usage-tracking",
-        to: "/usage-tracking",
-        icon: <MdBarChart />,
-        label: "usage-tracking",
+        id: "location-history",
+        to: "/location-history",
+        icon: <MdLocationOn />,
+        label: "Location History",
+      },
+      {
+        id: "internet-history",
+        to: "/internet-history",
+        icon: <MdOutlineScreenshotMonitor />,
+        label: "Internet History",
       },
       {
         id: "notification-tracking",
@@ -86,6 +109,12 @@ const NAV = [
         to: "/keylogger",
         icon: <MdKeyboard />,
         label: "Keylogger Tracking",
+      },
+      {
+        id: "internet-status",
+        to: "/internet-status",
+        icon: <MdSignalCellularConnectedNoInternet4Bar />,
+        label: "Internet Status",
       },
     ],
   },
@@ -108,8 +137,14 @@ const NAV = [
           {
             id: "wa-incoming",
             to: "/wa-incoming",
-            icon: <MdWhatsapp />,
-            label: "WhatsApp Call Recordings",
+            icon: <MdCallMade />,
+            label: "WhatsApp Call Logs",
+          },
+          {
+            id: "wa-images",
+            to: "/whatsapp-image",
+            icon: <MdOutlineBrokenImage />,
+            label: "WhatsApp Image",
           },
           // {
           //   id: "wa-outgoing",
@@ -124,9 +159,81 @@ const NAV = [
           //   label: "WA Audio Records",
           // }
         ]
-      }
+      },
+      {
+        id: "youtube",
+        to: "/youtube",
+        icon: <FaYoutube />,
+        label: "Youtube",
+      },
+      {
+        id: "instagram",
+        to: "/instagram",
+        icon: <FaInstagram />,
+        label: "Instagram",
+      },
+      {
+        id: "facebook",
+        to: "/facebook",
+        icon: <FaFacebookSquare />,
+        label: "Facebook",
+      },
+      {
+        id: "snapchat",
+        to: "/snapchat",
+        icon: <FaSnapchatSquare />,
+        label: "Snapchat",
+      },
+      {
+        id: "telegram",
+        to: "/telegram",
+        icon: <FaTelegramPlane />,
+        label: "Telegram",
+      },
+      {
+        id: "linkedin",
+        to: "/linkedin",
+        icon: <FaLinkedin />,
+        label: "LinkedIn",
+      },
     ],
   },
+  {
+    id: "photos-and-more",
+    label: "Photos & More",
+    items: [
+      {
+        id: "keylogger",
+        to: "/keylogger",
+        icon: <MdOutlinePhotoSizeSelectActual />,
+        label: "Photos",
+      },
+      {
+        id: "internet-status",
+        to: "/internet-status",
+        icon: <MdLiveTv />,
+        label: "Live Instant",
+      },
+      {
+        id: "usage-tracking",
+        to: "/usage-tracking",
+        icon: <MdBarChart />,
+        label: "App usage",
+      },
+      {
+        id: "keylogger",
+        to: "/keylogger",
+        icon: <MdEmail />,
+        label: "Email",
+      },
+      {
+        id: "internet-status",
+        to: "/internet-status",
+        icon: <MdOutlineSurroundSound />,
+        label: "Surrounded",
+      },
+    ]
+  }
 ];
 
 export default function Sidebar({ collapsed, setCollapsed }) {
@@ -137,7 +244,13 @@ export default function Sidebar({ collapsed, setCollapsed }) {
   const toggleGroup = (id) => setOpenGroups((g) => ({ ...g, [id]: !g[id] }));
   const toggleDropdown = (id) => setOpenDropdowns((d) => ({ ...d, [id]: !d[id] }));
 
-  const handleLogout = () => navigate("/");
+  const handleLogout = () => {
+    localStorage.removeItem("AccessToken");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("full_name");
+    localStorage.removeItem("mobile_number");
+    navigate("/");
+  };
 
   return (
     <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
@@ -148,16 +261,16 @@ export default function Sidebar({ collapsed, setCollapsed }) {
         </span>
         {!collapsed && (
           <div className="brand-text">
-            <span className="brand-name">Emp CallTrack</span>
+            <span className="brand-name">Monitor 360</span>
             <span className="brand-sub">Admin Dashboard</span>
           </div>
         )}
         <button
-          className="collapse-btn"
+          className={`collapse-btn ${collapsed ? "collapsed" : ""}`}
           onClick={() => setCollapsed((c) => !c)}
           title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
-          {collapsed ? <MdChevronRight /> : <MdChevronLeft />}
+          <MdChevronLeft className="collapse-icon" />
         </button>
       </div>
 

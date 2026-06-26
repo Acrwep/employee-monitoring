@@ -12,9 +12,19 @@ const PAGE_TITLES = {
     '/sms-monitoring': 'SMS Monitoring',
     '/keylogger': 'Keylogger Tracking',
     '/wa-chats': 'WhatsApp Chats',
-    '/wa-incoming': 'WhatsApp Incoming Calls',
+    '/wa-incoming': 'WhatsApp Call Logs',
     '/wa-outgoing': 'WhatsApp Outgoing Calls',
     '/wa-audio': 'WhatsApp Audio Call Records',
+    '/location-history': 'Location History',
+    '/internet-history': 'Internet History',
+    '/internet-status': 'Internet Status',
+    '/instagram': 'Instagram Chats',
+    '/facebook': 'Facebook Chats',
+    '/snapchat': 'Snapchat Chats',
+    '/telegram': 'Telegram Chats',
+    '/linkedin': 'LinkedIn Chats',
+    '/youtube': 'YouTube Chats',
+    '/whatsapp-image': 'WhatsApp Image',
 };
 
 export default function Topbar({ collapsed, setCollapsed }) {
@@ -35,13 +45,13 @@ export default function Topbar({ collapsed, setCollapsed }) {
                 </button> */}
                 <div className="page-info">
                     <span className="page-title-text">{title}</span>
-                    <span className="page-breadcrumb">Emp CallTrack &rsaquo; {title}</span>
+                    <span className="page-breadcrumb">Monitor 360 &rsaquo; {title}</span>
                 </div>
             </div>
 
             {/* Right: search + notifications + user */}
             <div className="topbar-right">
-                <div className="topbar-search">
+                {/* <div className="topbar-search">
                     <MdSearch className="search-icon" />
                     <input
                         id="topbar-search-input"
@@ -49,7 +59,7 @@ export default function Topbar({ collapsed, setCollapsed }) {
                         placeholder="Search..."
                         aria-label="Search"
                     />
-                </div>
+                </div> */}
 
                 <button className="icon-btn notif-btn" id="topbar-notifications" aria-label="Notifications">
                     <MdNotifications />

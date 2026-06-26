@@ -54,12 +54,12 @@ export const dashboardUsers = [
 
 // ─── Call Recording ────────────────────────────────────────────────
 export const callRecordingData = [
-    { id: 1, caller: "vignesh", number: "+91 98765 43210", duration: "5:32", date: "2026-02-25", time: "09:15 AM", size: "2.1 MB", type: "Outgoing" },
-    { id: 2, caller: "Priya Mehta", number: "+91 87654 32109", duration: "3:18", date: "2026-02-25", time: "10:30 AM", size: "1.4 MB", type: "Incoming" },
-    { id: 3, caller: "Rahul Verma", number: "+91 76543 21098", duration: "8:45", date: "2026-02-24", time: "02:00 PM", size: "3.5 MB", type: "Outgoing" },
-    { id: 4, caller: "Sneha Kapoor", number: "+91 65432 10987", duration: "2:10", date: "2026-02-24", time: "04:20 PM", size: "0.9 MB", type: "Incoming" },
-    { id: 5, caller: "Vikram Nair", number: "+91 54321 09876", duration: "6:05", date: "2026-02-23", time: "11:00 AM", size: "2.5 MB", type: "Outgoing" },
-    { id: 6, caller: "Anita Rao", number: "+91 43210 98765", duration: "4:22", date: "2026-02-23", time: "01:45 PM", size: "1.8 MB", type: "Incoming" },
+    { id: 1, caller: "vignesh", number: "+91 98765 43210", duration: "00:05:32", date: "2026-02-25", time: "09:15 AM", size: "2.1 MB", type: "Outgoing" },
+    { id: 2, caller: "Priya Mehta", number: "+91 87654 32109", duration: "00:00:58", date: "2026-02-25", time: "10:30 AM", size: "1.4 MB", type: "Incoming" },
+    { id: 3, caller: "Rahul Verma", number: "+91 76543 21098", duration: "00:08:45", date: "2026-02-24", time: "02:00 PM", size: "3.5 MB", type: "Outgoing" },
+    { id: 4, caller: "Sneha Kapoor", number: "+91 65432 10987", duration: "00:010:10", date: "2026-02-24", time: "04:20 PM", size: "0.9 MB", type: "Incoming" },
+    { id: 5, caller: "Vikram Nair", number: "+91 54321 09876", duration: "00:015:05", date: "2026-02-23", time: "11:00 AM", size: "2.5 MB", type: "Outgoing" },
+    { id: 6, caller: "Anita Rao", number: "+91 43210 98765", duration: "00:04:22", date: "2026-02-23", time: "01:45 PM", size: "1.8 MB", type: "Incoming" },
 ];
 
 // ─── Call History ──────────────────────────────────────────────────
@@ -140,11 +140,11 @@ export const whatsappChatsData = [
 
 // ─── WhatsApp Incoming Calls ───────────────────────────────────────
 export const whatsappIncomingCallsData = [
-    { status: "Incomming", name: "Priya Mehta", number: "+91 98765 43210", duration: "12:30", size: "1201 kb", play: "Play", timestamp: "17/06/2026 11:00 AM" },
-    { status: "Incomming", name: "Rahul Verma", number: "+91 76908 79456", duration: "0:00", size: "205 kb", play: "Play", timestamp: "17/06/2026 01:20 PM" },
-    { status: "Incomming", name: "vignesh", number: "+91 90765 87465", duration: "5:45", size: "71 kb", play: "Play", timestamp: "17/06/2026 09:30 AM" },
-    { status: "Incomming", name: "Sneha Kapoor", number: "+91 65789 64592", duration: "20:00", size: "2908 kb", play: "Play", timestamp: "17/06/2026 08:00 PM" },
-    { status: "Incomming", name: "Vikram Nair", number: "+91 93648 67594", duration: "0:00", size: "3278 kb", play: "Play", timestamp: "17/06/2026 02:45 PM" },
+    { status: "Incomming", name: "Priya Mehta", duration: "00:12:30", timestamp: "17/06/2026 11:00 AM" },
+    { status: "Incomming", name: "Rahul Verma", duration: "00:00:56", timestamp: "17/06/2026 01:20 PM" },
+    { status: "Incomming", name: "vignesh", duration: "00:05:45", timestamp: "17/06/2026 09:30 AM" },
+    { status: "Incomming", name: "Sneha Kapoor", duration: "00:20:00", timestamp: "17/06/2026 08:00 PM" },
+    { status: "Incomming", name: "Vikram Nair", duration: "00:01:04", timestamp: "17/06/2026 02:45 PM" },
 ];
 
 // ─── WhatsApp Outgoing Calls ───────────────────────────────────────

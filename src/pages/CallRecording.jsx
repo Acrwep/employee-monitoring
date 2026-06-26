@@ -27,7 +27,7 @@ const columns = [
 export default function CallRecording() {
     return (
         <div className="module-root">
-            <div className="module-header">
+            {/* <div className="module-header">
                 <div className="module-title-row">
                     <span className="module-icon blue"><MdPhoneCallback /></span>
                     <div>
@@ -35,7 +35,7 @@ export default function CallRecording() {
                         <p className="module-sub">All recorded calls captured from monitored devices</p>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <DataTable
                 title="Call Recordings"
                 icon={<MdPhoneCallback />}

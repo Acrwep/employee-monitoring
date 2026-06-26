@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getAppUsage, getUsers } from '../services/api';
 import { MdBarChart } from 'react-icons/md';
 import DataTable from '../components/common/DataTable';
 import './ModulePage.css';
 
 const columns = [
-    { key: 'usage_id', label: '#' },
+
     { key: 'full_name', label: 'User Name' },
     { key: 'app_name', label: 'Application Name' },
     { key: 'package_name', label: 'Package Name' },
@@ -28,23 +28,44 @@ const columns = [
 export default function UsageTracking() {
     const [usageData, setUsageData] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(10);
+    const [userId, setUserId] = useState(null);
+    const [users, setUsers] = useState([]);
+    const [pagination, setPagination] = useState({ total: 0, totalPages: 1 });
+
+    useEffect(() => {
+        getUsers().then(res => {
+            if (res.data && res.data.success) {
+                setUsers(res.data.data);
+            }
+        }).catch(err => console.error("Failed to fetch users:", err));
+    }, []);
 
     const getUsageData = async () => {
         try {
             setLoading(true);
 
-            const response = await axios.post(
-                'http://localhost:3000/api/app-usage',
-                {
-                    user_id: 101
-                }
-            );
+            const payload = {
+                page,
+                limit
+            };
+            if (userId) {
+                payload.user_id = userId;
+            }
 
-            if (response.data.success) {
-                const sortedData = [...response.data.data].sort(
+            const response = await getAppUsage(payload);
+
+            if (response.data && response.data.success) {
+                const logs = response.data.data.data || [];
+                const sortedData = [...logs].sort(
                     (a, b) => a.usage_id - b.usage_id
                 );
                 setUsageData(sortedData);
+                setPagination({
+                    total: response.data.data.pagination.total || 0,
+                    totalPages: response.data.data.pagination.totalPages || 1
+                });
             }
         } catch (error) {
             console.error('Usage Tracking Error:', error);
@@ -55,11 +76,11 @@ export default function UsageTracking() {
 
     useEffect(() => {
         getUsageData();
-    }, []);
+    }, [page, limit, userId]);
 
     return (
         <div className="module-root">
-            <div className="module-header">
+            {/* <div className="module-header">
                 <div className="module-title-row">
                     <span className="module-icon blue">
                         <MdBarChart />
@@ -73,7 +94,7 @@ export default function UsageTracking() {
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <DataTable
                 title="Application Usage"
@@ -81,6 +102,21 @@ export default function UsageTracking() {
                 columns={columns}
                 data={usageData}
                 loading={loading}
+                currentPage={page}
+                totalPages={pagination.totalPages}
+                totalRecords={pagination.total}
+                onPageChange={(newPage) => setPage(newPage)}
+                rowsPerPage={limit}
+                onRowsPerPageChange={(newLimit) => {
+                    setLimit(newLimit);
+                    setPage(1);
+                }}
+                userId={userId}
+                users={users}
+                onUserChange={(newUserId) => {
+                    setUserId(newUserId);
+                    setPage(1);
+                }}
             />
         </div>
     );

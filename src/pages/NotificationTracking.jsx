@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getNotifications, getUsers } from '../services/api';
 import { MdNotifications } from 'react-icons/md';
 import DataTable from '../components/common/DataTable';
 import './ModulePage.css';
 
 const columns = [
-    { key: 'notification_id', label: '#' },
+    // { key: 'notification_id', label: '#' },
     { key: 'full_name', label: 'User Name' },
     { key: 'app_name', label: 'Application Name' },
     { key: 'package_name', label: 'Package Name' },
@@ -34,24 +34,45 @@ export default function Notification() {
     const [notificationData, setNotificationData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(10);
+    const [userId, setUserId] = useState(null);
+    const [users, setUsers] = useState([]);
+    const [pagination, setPagination] = useState({ total: 0, totalPages: 1 });
+
+    useEffect(() => {
+        getUsers().then(res => {
+            if (res.data && res.data.success) {
+                setUsers(res.data.data);
+            }
+        }).catch(err => console.error("Failed to fetch users:", err));
+    }, []);
 
     const getNotificationData = async () => {
         try {
             setLoading(true);
             setError(null);
 
-            const response = await axios.post(
-                'http://localhost:3000/api/notifications',
-                {
-                    user_id: 101
-                }
-            );
+            const payload = {
+                page,
+                limit
+            };
+            if (userId) {
+                payload.user_id = userId;
+            }
 
-            if (response.data.success) {
-                const sortedData = [...response.data.data].sort(
+            const response = await getNotifications(payload);
+
+            if (response.data && response.data.success) {
+                const logs = response.data.data.data || [];
+                const sortedData = [...logs].sort(
                     (a, b) => a.notification_id - b.notification_id
                 );
                 setNotificationData(sortedData);
+                setPagination({
+                    total: response.data.data.pagination.total || 0,
+                    totalPages: response.data.data.pagination.totalPages || 1
+                });
             }
         } catch (error) {
             console.error('Notification Error:', error);
@@ -63,11 +84,11 @@ export default function Notification() {
 
     useEffect(() => {
         getNotificationData();
-    }, []);
+    }, [page, limit, userId]);
 
     return (
         <div className="module-root">
-            <div className="module-header">
+            {/* <div className="module-header">
                 <div className="module-title-row">
                     <span className="module-icon blue">
                         <MdNotifications />
@@ -79,7 +100,7 @@ export default function Notification() {
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {loading ? (
                 <div style={{ padding: '2rem', textAlign: 'center' }}>Loading...</div>
@@ -91,6 +112,21 @@ export default function Notification() {
                     icon={<MdNotifications />}
                     columns={columns}
                     data={notificationData}
+                    currentPage={page}
+                    totalPages={pagination.totalPages}
+                    totalRecords={pagination.total}
+                    onPageChange={(newPage) => setPage(newPage)}
+                    rowsPerPage={limit}
+                    onRowsPerPageChange={(newLimit) => {
+                        setLimit(newLimit);
+                        setPage(1);
+                    }}
+                    userId={userId}
+                    users={users}
+                    onUserChange={(newUserId) => {
+                        setUserId(newUserId);
+                        setPage(1);
+                    }}
                 />
             )}
         </div>

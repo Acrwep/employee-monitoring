@@ -1,36 +1,84 @@
 import React, { useState } from 'react';
+import { login } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import { MdEmail, MdLock, MdVisibility, MdVisibilityOff, MdSecurity } from 'react-icons/md';
 import './login.css';
 
 export default function Login() {
     const navigate = useNavigate();
-    const [form, setForm] = useState({ email: '', password: '' });
+    const [form, setForm] = useState({ mobile_number: '', password: '' });
     const [errors, setErrors] = useState({});
     const [showPass, setShowPass] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const validate = () => {
         const errs = {};
-        if (!form.email.trim()) errs.email = 'Email / Username is required';
-        else if (form.email.includes('@') && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-            errs.email = 'Enter a valid email address';
+        if (!form.mobile_number.trim()) {
+            errs.mobile_number = 'Mobile Number is required';
+        } else if (!/^\d{10}$/.test(form.mobile_number)) {
+            errs.mobile_number = 'Enter valid 10 digit mobile number';
         }
+
         if (!form.password) errs.password = 'Password is required';
         else if (form.password.length < 6) errs.password = 'Password must be at least 6 characters';
         return errs;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
         const errs = validate();
-        if (Object.keys(errs).length) { setErrors(errs); return; }
-        setErrors({});
-        setLoading(true);
-        setTimeout(() => {
+
+        if (Object.keys(errs).length) {
+            setErrors(errs);
+            return;
+        }
+
+        try {
+            setLoading(true);
+
+            const response = await login({
+                mobile_number: form.mobile_number,
+                password: form.password
+            });
+
+            console.log(response.data);
+
+            if (response.data.success) {
+
+                localStorage.setItem(
+                    'AccessToken',
+                    response.data.token
+                );
+
+                localStorage.setItem(
+                    'user_id',
+                    response.data.user_id
+                );
+
+                localStorage.setItem(
+                    'full_name',
+                    response.data.full_name
+                );
+
+                localStorage.setItem(
+                    'mobile_number',
+                    response.data.mobile_number
+                );
+
+                navigate('/dashboard');
+            }
+
+        } catch (error) {
+
+            alert(
+                error?.response?.data?.message ||
+                'Invalid phone number or password'
+            );
+
+        } finally {
             setLoading(false);
-            navigate('/dashboard');
-        }, 1500);
+        }
     };
 
     const handleChange = (e) => {
@@ -52,8 +100,8 @@ export default function Login() {
                 <div className="login-logo">
                     <span className="logo-icon"><MdSecurity /></span>
                     <div className="logo-text">
-                        <span className="logo-title">Emp CallTrack</span>
-                        <span className="logo-sub">Admin Monitoring Portal</span>
+                        <span className="logo-title">Monitor 360</span>
+                        <span className="logo-sub">Admin Monitoring Dashboard</span>
                     </div>
                 </div>
 
@@ -61,21 +109,21 @@ export default function Login() {
 
                 <form onSubmit={handleSubmit} className="login-form" noValidate>
                     {/* Email */}
-                    <div className={`field-group ${errors.email ? 'field-error' : ''}`}>
-                        <label htmlFor="login-email">Email / Username</label>
+                    <div className={`field-group ${errors.mobile_number ? 'field-error' : ''}`}>
+                        <label htmlFor="login-mobile">User Mobile Number</label>
                         <div className="input-wrapper">
                             <MdEmail className="input-icon" />
                             <input
-                                id="login-email"
-                                name="email"
+                                id="login-mobile"
+                                name="mobile_number"
                                 type="text"
-                                placeholder="admin@company.com"
-                                value={form.email}
+                                placeholder="Enter Mobile Number"
+                                value={form.mobile_number}
                                 onChange={handleChange}
-                                autoComplete="username"
+                            // autoComplete="username"
                             />
                         </div>
-                        {errors.email && <span className="error-msg">{errors.email}</span>}
+                        {errors.mobile_number && <span className="error-msg">{errors.mobile_number}</span>}
                     </div>
 
                     {/* Password */}
@@ -120,9 +168,9 @@ export default function Login() {
                 </form>
 
                 <p className="login-hint">
-                    Demo: use any email &amp; password (min 6 chars)
+                    Demo: Enter valid Mobile Number and Password
                 </p>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }

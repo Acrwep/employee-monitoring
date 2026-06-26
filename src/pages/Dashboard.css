@@ -24,11 +24,9 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 14px;
-  background: linear-gradient(
-    120deg,
-    rgba(88, 166, 255, 0.08) 0%,
-    rgba(188, 140, 255, 0.08) 100%
-  );
+  background: linear-gradient(120deg,
+      rgba(88, 166, 255, 0.08) 0%,
+      rgba(188, 140, 255, 0.08) 100%);
   border: 1px solid rgba(88, 166, 255, 0.15);
   border-radius: var(--radius-lg);
   padding: 24px 28px;
@@ -69,6 +67,7 @@
 }
 
 @keyframes livePulse {
+
   0%,
   100% {
     opacity: 1;
@@ -84,7 +83,7 @@
 /* ── Stats Grid ── */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(211px, 1fr));
   gap: 16px;
 }
 
@@ -337,4 +336,312 @@
   .emp-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ── Dashboard Filters ── */
+.dash-filters {
+  display: flex;
+  gap: 20px;
+  border-radius: var(--radius-lg);
+  padding: 10px 15px;
+  align-items: flex-end;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  max-width: 320px;
+}
+
+.date-filter-group {
+  flex: 2;
+}
+
+.filter-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.filter-input-wrap,
+.date-picker-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.filter-select:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+}
+
+.filter-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.custom-dates {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.filter-date {
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  cursor: pointer;
+  outline: none;
+}
+
+.filter-date:focus {
+  border-color: var(--accent-primary);
+}
+
+.date-sep {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .dash-filters {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .filter-input-wrap,
+  .date-picker-wrap {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .custom-dates {
+    width: 100%;
+  }
+
+  .filter-date {
+    width: 100%;
+  }
+
+  .date-sep {
+    text-align: center;
+  }
+}
+
+/* ── Custom Date Dropdown ── */
+.custom-date-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.cdd-button {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.cdd-arrow {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.cdd-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cdd-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  outline: none;
+  cursor: pointer;
+}
+
+.cdd-custom-inputs {
+  display: flex;
+  gap: 12px;
+}
+
+.cdd-input-group {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cdd-input-group label {
+  position: absolute;
+  top: -8px;
+  left: 10px;
+  background: var(--bg-card);
+  padding: 0 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  z-index: 1;
+}
+
+.cdd-input-group input {
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-primary);
+  background: transparent;
+  outline: none;
+  width: 100%;
+}
+
+.cdd-input-group input:focus {
+  border-color: var(--accent-primary);
+}
+
+/* ── Summary Tables ── */
+.summary-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  margin-top: 32px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 24px;
+}
+
+.summary-icon {
+  font-size: 22px;
+}
+
+.summary-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.summary-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.summary-table th,
+.summary-table td {
+  padding: 14px 24px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.summary-table th {
+  background: rgba(0, 0, 0, 0.02);
+  color: var(--text-secondary);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+.summary-table tbody tr {
+  transition: background var(--transition);
+}
+
+.summary-table tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+.row-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Call Summary Specifics */
+.call-summary {
+  border-top: 4px solid var(--accent-primary);
+}
+
+.call-summary .summary-header {
+  background: linear-gradient(90deg, rgba(88, 166, 255, 0.1) 0%, transparent 100%);
+}
+
+.call-summary .summary-icon {
+  color: var(--accent-primary);
+}
+
+.call-summary .summary-table th {
+  background: rgba(88, 166, 255, 0.05);
+}
+
+/* WhatsApp Summary Specifics */
+.whatsapp-summary {
+  border-top: 4px solid #25D366;
+}
+
+.whatsapp-summary .summary-header {
+  background: linear-gradient(90deg, rgba(37, 211, 102, 0.1) 0%, transparent 100%);
+}
+
+.whatsapp-summary .summary-icon {
+  color: #25D366;
+}
+
+.whatsapp-summary .summary-table th {
+  background: rgba(37, 211, 102, 0.05);
+}
+
+.summary-table td:not(.row-name),
+.summary-table th:not(:first-child) {
+  text-align: right;
 }

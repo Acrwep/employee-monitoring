@@ -19,7 +19,7 @@ const columns = [
 export default function Keylogger() {
     return (
         <div className="module-root">
-            <div className="module-header">
+            {/* <div className="module-header">
                 <div className="module-title-row">
                     <span className="module-icon red"><MdKeyboard /></span>
                     <div>
@@ -27,7 +27,7 @@ export default function Keylogger() {
                         <p className="module-sub">Keystrokes captured from all monitored applications</p>
                     </div>
                 </div>
-            </div>
+            </div> */}
             <DataTable
                 title="Keylogger Tracking"
                 icon={<MdKeyboard />}
